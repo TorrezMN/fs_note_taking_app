@@ -11,7 +11,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"H33333333333333333333ello": "World"}
+    return {"H3": "World"}
 
 
 @app.get("/test")

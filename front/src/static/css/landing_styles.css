@@ -1,0 +1,39 @@
+
+/* BIG DEVICES */
+@media all and (min-width: 30em) {
+  *{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+  }
+  .landing_body{
+    background:red;
+    min-width:100vw;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+  }
+  .landing_stats{
+    min-height:20vh;
+    background:green;
+    min-width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:center;
+  }
+  .landing_stats_left{
+    background:gray;
+    width:20%;
+    min-height:100%;
+
+
+  }
+  .landing_stats_right{
+    background:orange;
+    width:100%;
+    height:6rem;
+  }
+}
