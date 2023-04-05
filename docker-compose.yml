@@ -44,6 +44,10 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     command: -p 5433
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=note_taking_db
     expose:
       - "5433"
     ports:

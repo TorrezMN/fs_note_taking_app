@@ -21,16 +21,6 @@ COPY . /code/back
 
 
 
-
-RUN pwd
-RUN echo 
-RUN echo 
-RUN echo 
-RUN ls 
-
-
-
-
 ENTRYPOINT ["sh", "entry.sh"]
 
 
