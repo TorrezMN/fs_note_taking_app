@@ -1,16 +1,13 @@
-import  {useEffect} from 'react';
+import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-
 
 import Landing from "./views/landing.js";
 
 function App() {
-
-  useEffect(()=>{
+  useEffect(() => {
     document.title = "Note Taking APP";
-  },[]);
+  }, []);
 
   return (
     <Router>

@@ -4,14 +4,14 @@
 
 from fastapi import Depends, HTTPException, APIRouter
 from db_engine.database import SessionLocal, engine
-from db_engine import dose_crud as crud
+from db_engine import crud as crud
 
 #  IMPORTING SCHEMAS
-from schemas.dose_schemas import Dose, Dose_Name
+#  from schemas.dose_schemas import Dose, Dose_Name
 
-dose_router = APIRouter(
-    prefix="/dose",
-    tags=["dose"],
+notes_router = APIRouter(
+    prefix="/notes",
+    tags=["notes"],
 )
 
 
@@ -23,18 +23,16 @@ def db():
         db.close()
 
 
-@dose_router.get("/get_all_dose")
-def get_all_dose(db=Depends(db)):
-    """
-    Get All Dose
-    ---
+@notes_router.get("/")
+def notes_root():
+    return {"notes": "root!"}
 
-    Returns a list of ``all`` dose registered in the sistem.
 
-    """
+@notes_router.get("/get_all_notes")
+def get_all_notes(db=Depends(db)):
+    return {"notes": "get_all_notes!"}
 
-    data = crud.get_all_dose(db)
-    size = len(data)
-    API_RESPONSE["size"] = size
-    API_RESPONSE["data"] = data
-    return API_RESPONSE
+
+@notes_router.get("/get_all_tags")
+def get_all_tags(db=Depends(db)):
+    return {"notes": "get_all_tags!"}

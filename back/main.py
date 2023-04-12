@@ -6,7 +6,14 @@ from typing import Union
 
 from fastapi import FastAPI
 
+#  IMPORTING ROUTERS
+from routers import notes_router
+
 app = FastAPI()
+
+
+#  INCLUDING ROUTERS
+app.include_router(notes_router.notes_router)
 
 
 @app.get("/")
