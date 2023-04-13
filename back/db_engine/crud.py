@@ -3,18 +3,35 @@
 # Author: Torrez, Milton N.
 
 from db_engine import models
-
-#  from schemas.dose_schemas import Dose
-#  IMPORTING SCHEMAS
-#  from schemas.vaccine_schemas import Vaccine
 from sqlalchemy.orm import Session
 
+#  IMPORTING SCHEMAS
+from schemas.dose_schemas import Dose, Dose_Name
 
-#  def get_all_notes(db: Session, rec: Record):
-def get_all_notes(db: Session, rec):
-    print("CRUD -> get_all_notes!")
-    #  rec = models.Person_Record(**rec.dict())
-    #  db.add(rec)
-    #  db.commit()
-    #  db.refresh(rec)
-    #  return (rec)
+
+def save_dose(db: Session, info: Dose):
+    dose = models.Dose(**info.dict())
+    db.add(dose)
+    db.commit()
+    db.refresh(dose)
+    return dose
+
+
+def filter_record_by_id(db: Session, id: int):
+    return db.query(models.Dose).filter(models.Dose.id == id).first()
+
+
+def get_all_dose(db: Session):
+    return db.query(models.Dose).all()
+
+
+def get_or_create_new_dose(db: Session, d: Dose_Name):
+    instance = db.query(models.Dose).filter_by(**d.dict()).first()
+    if instance:
+        return instance
+    else:
+        v = models.Dose(**d.dict())
+        db.add(v)
+        db.commit()
+        db.refresh(v)
+        return v
