@@ -18,4 +18,3 @@ class Note(Base):
     note_id = Column(Integer, primary_key=True, autoincrement=True)
     note_content = Column(String(1000), unique=True, index=True)
     note_date = Column(Date, index=True)
-    note_tags = relationship("Tags", backref="Note")
