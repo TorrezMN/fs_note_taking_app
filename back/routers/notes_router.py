@@ -68,5 +68,6 @@ def add_new_tag(word: Tags, db=Depends(db)):
 
 
 @notes_router.post("/filter_tags")
-def filter_tags(word: Tags, db=Depends(db)):
-    return {"notes": "filter_tags!"}
+def filter_tags(word: str, db=Depends(db)):
+    API_RESPONSE["data"] = crud.filter_tag_by_name(db, word)
+    return API_RESPONSE
