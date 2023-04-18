@@ -11,9 +11,6 @@ from routers import notes_router
 from routers import tags_router
 from routers import topics_router
 
-#  IMPORTING SCHEMAS
-#  from schemas.dose_schemas import Dose
-
 
 models.Base.metadata.create_all(bind=engine)
 

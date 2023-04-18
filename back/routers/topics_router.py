@@ -4,10 +4,10 @@
 
 from fastapi import Depends, HTTPException, APIRouter
 from db_engine.database import SessionLocal, engine
-from db_engine import crud as crud
+from db_engine import topics_crud as crud
 
 #  IMPORTING SCHEMAS
-from schemas.notes_schemas import Tags, Note
+from schemas.notes_schemas import Topics, Tags, Note
 from schemas.base_schema import API_RESPONSE
 
 
@@ -36,3 +36,9 @@ def topics_root():
 @topics_router.get("/get_random_topic")
 def get_random_topic(n, db=Depends(db)):
     return {"notes": "get_random_topic!"}
+
+
+@topics_router.post("/add_new_topic")
+def add_new_topic(word: Topics, db=Depends(db)):
+    API_RESPONSE["data"] = crud.new_topic(db, word)
+    return API_RESPONSE

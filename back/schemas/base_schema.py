@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 # Author: Torrez, Milton N.
 
+from time import gmtime, strftime
 
 API_RESPONSE = {
     "version": "0.0.1",
-    "year": 2022,
+    "date_time": strftime("%Y-%m-%d %H:%M:%S", gmtime()),
 }

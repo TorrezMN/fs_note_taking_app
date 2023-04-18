@@ -20,6 +20,13 @@ from pydantic import BaseModel
 #  orm_mode = True
 
 
+class Topics(BaseModel):
+    topic_name: str
+
+    class Config:
+        orm_mode = True
+
+
 class Tags(BaseModel):
     tag_name: str
 

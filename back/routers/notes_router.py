@@ -4,7 +4,7 @@
 
 from fastapi import Depends, HTTPException, APIRouter
 from db_engine.database import SessionLocal, engine
-from db_engine import crud as crud
+from db_engine import notes_crud as crud
 
 #  IMPORTING SCHEMAS
 from schemas.notes_schemas import Note
