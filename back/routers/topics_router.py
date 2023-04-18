@@ -34,11 +34,24 @@ def topics_root():
 #  TOPICS
 ####################
 @topics_router.get("/get_random_topic")
-def get_random_topic(n, db=Depends(db)):
-    return {"notes": "get_random_topic!"}
+def get_random_topic(db=Depends(db)):
+    API_RESPONSE["data"] = crud.get_random_topic(db)
+    return API_RESPONSE
+
+
+@topics_router.get("/get_all_topics")
+def get_all_topics(db=Depends(db)):
+    API_RESPONSE["data"] = crud.get_all_topics(db)
+    return API_RESPONSE
 
 
 @topics_router.post("/add_new_topic")
 def add_new_topic(word: Topics, db=Depends(db)):
     API_RESPONSE["data"] = crud.new_topic(db, word)
+    return API_RESPONSE
+
+
+@topics_router.post("/filter_topics")
+def filter_topics(word: str, db=Depends(db)):
+    API_RESPONSE["data"] = crud.filter_topic_by_name(db, word)
     return API_RESPONSE
