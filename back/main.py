@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 #  IMPORTING ROUTERS
 from routers import notes_router
+from routers import tags_router
+from routers import topics_router
 
 #  IMPORTING SCHEMAS
 #  from schemas.dose_schemas import Dose
@@ -31,6 +33,8 @@ app.add_middleware(
 
 #  INCLUDING ROUTERS
 app.include_router(notes_router.notes_router)
+app.include_router(tags_router.tags_router)
+app.include_router(topics_router.topics_router)
 
 
 def db():
