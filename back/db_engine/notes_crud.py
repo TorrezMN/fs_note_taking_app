@@ -5,21 +5,20 @@
 from db_engine import models
 from sqlalchemy.orm import Session
 
+from db_engine.tags_crud import get_tag_by_id
+
 #  IMPORTING SCHEMAS
 from schemas.notes_schemas import Tags, Note
 
 
-def get_all_tags(db: Session):
-    return db.query(models.Tags).all()
+def new_note(db: Session, t: Note):
+    tags = [get_tag_by_id(db, i) for i in t.tags]
+    n = models.Note()
+    n.note_content = t.note_content
+    n.note_date = t.note_date
+    n.tags = tags
 
-
-def new_tag(db: Session, t: Tags):
-    tag = models.Tags(**t.dict())
-    db.add(tag)
+    db.add(n)
     db.commit()
-    db.refresh(tag)
-    return tag
-
-
-def filter_tag_by_name(db: Session, tag_name: str):
-    return db.query(models.Tags).filter(models.Tags.tag_name.contains(tag_name)).first()
+    db.refresh(n)
+    return n

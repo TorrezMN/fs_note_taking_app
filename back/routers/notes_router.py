@@ -35,6 +35,12 @@ def notes_root():
 ####################
 
 
+@notes_router.post("/add_new_note")
+def add_new_note(n: Note, db=Depends(db)):
+    API_RESPONSE["data"] = crud.new_note(db, n)
+    return API_RESPONSE
+
+
 @notes_router.get("/get_all_notes")
 def get_all_notes(db=Depends(db)):
     return {"notes": "get_all_notes!"}

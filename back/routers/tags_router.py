@@ -47,6 +47,12 @@ def add_new_tag(word: Tags, db=Depends(db)):
     return API_RESPONSE
 
 
+@tags_router.post("/get_by_id")
+def get_tag_by_id(id: int, db=Depends(db)):
+    API_RESPONSE["data"] = crud.get_tag_by_id(db, id)
+    return API_RESPONSE
+
+
 @tags_router.post("/filter_tags")
 def filter_tags(word: str, db=Depends(db)):
     API_RESPONSE["data"] = crud.filter_tag_by_name(db, word)

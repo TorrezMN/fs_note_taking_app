@@ -5,19 +5,7 @@
 from datetime import date
 from typing import Optional
 from pydantic import BaseModel
-
-#  class Record(BaseModel):
-#  nombre: str
-#  apellido: str
-#  fecha_aplicacion: date
-#  cedula: str
-#  establishment: int
-#  dose: int
-#  vaccine: int
-#  actualizado_al: date
-#
-#  class Config:
-#  orm_mode = True
+from typing import List
 
 
 class Topics(BaseModel):
@@ -37,7 +25,7 @@ class Tags(BaseModel):
 class Note(BaseModel):
     note_content: str
     note_date: date
-    note_tags: int
+    tags: List[int]
 
     class Config:
         orm_mode = True
