@@ -10,8 +10,8 @@ from sqlalchemy.orm import backref, relationship
 note_tag = Table(
     "note_tag",
     Base.metadata,
-    Column("tag_id", Integer(), ForeignKey("tag.id")),
-    Column("note_id", Integer(), ForeignKey("note.id")),
+    Column("tag_id", Integer, ForeignKey("tag.id")),
+    Column("note_id", Integer, ForeignKey("note.id")),
 )
 
 
@@ -26,7 +26,7 @@ class Note(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     note_content = Column(String(1000), unique=True, index=True)
     note_date = Column(Date, index=True)
-    tags = relationship("Tag", secondary=note_tag, backref="tags")
+    tags = relationship("Tag", secondary=note_tag, backref="notes")
 
 
 class Topic(Base):

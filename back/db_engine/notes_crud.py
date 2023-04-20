@@ -17,7 +17,6 @@ def new_note(db: Session, t: Note):
     n.note_content = t.note_content
     n.note_date = t.note_date
     n.tags = tags
-
     db.add(n)
     db.commit()
     db.refresh(n)
