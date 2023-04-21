@@ -19,6 +19,10 @@ class Tag(Base):
     __tablename__ = "tag"
     id = Column(Integer, primary_key=True, autoincrement=True)
     tag_name = Column(String(30), unique=True, index=True)
+    notes = relationship("Note", secondary=note_tag, backref="tags")
+
+    def __repr__(self):
+        return self.tag_name
 
 
 class Note(Base):
@@ -26,7 +30,9 @@ class Note(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     note_content = Column(String(1000), unique=True, index=True)
     note_date = Column(Date, index=True)
-    tags = relationship("Tag", secondary=note_tag, backref="notes")
+
+    def __repr__(self):
+        return "ESTA ES UNA NOTA DE MIERDA!"
 
 
 class Topic(Base):

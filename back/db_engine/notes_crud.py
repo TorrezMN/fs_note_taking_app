@@ -21,3 +21,9 @@ def new_note(db: Session, t: Note):
     db.commit()
     db.refresh(n)
     return n
+
+
+def get_all_notes(db: Session):
+    notes = db.query(models.Note).all()
+    tags = [i.tags for i in notes]
+    return notes

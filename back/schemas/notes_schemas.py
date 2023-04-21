@@ -23,9 +23,11 @@ class Tags(BaseModel):
 
 
 class Note(BaseModel):
+    __tablename__ = "note"
+    id: int
+    tags: List[int]
     note_content: str
     note_date: date
-    tags: List[int]
 
     class Config:
         orm_mode = True
