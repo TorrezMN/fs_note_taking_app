@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: Torrez, Milton N.
 
-from datetime import date
+from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel
 from typing import List
@@ -27,7 +27,7 @@ class Note(BaseModel):
     id: int
     tags: List[int]
     note_content: str
-    note_date: date
+    note_date: datetime
 
     class Config:
         orm_mode = True

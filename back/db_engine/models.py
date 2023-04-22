@@ -2,8 +2,18 @@
 # -*- coding: utf-8 -*-
 # Author: Torrez, Milton N.
 
+import datetime
 from db_engine.database import Base
-from sqlalchemy import Boolean, Column, Integer, String, ForeignKey, Date, Table
+from sqlalchemy import (
+    Boolean,
+    DateTime,
+    Column,
+    Integer,
+    String,
+    ForeignKey,
+    Date,
+    Table,
+)
 from sqlalchemy.orm import backref, relationship
 
 
@@ -29,7 +39,7 @@ class Note(Base):
     __tablename__ = "note"
     id = Column(Integer, primary_key=True, autoincrement=True)
     note_content = Column(String(1000), unique=True, index=True)
-    note_date = Column(Date, index=True)
+    note_date = Column(DateTime, index=True, default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return "ESTA ES UNA NOTA DE MIERDA!"
