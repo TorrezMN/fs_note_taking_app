@@ -76,3 +76,8 @@ def get_random_note(db=Depends(db)):
     API_RESPONSE["data"] = crud.get_random_note(db)
     return API_RESPONSE
 
+
+@notes_router.get("/delete_note")
+def get_random_note(note_id: int, db=Depends(db)):
+    API_RESPONSE["data"] = crud.delete_note_by_id(db, note_id)
+    return API_RESPONSE

@@ -6,6 +6,7 @@ from db_engine import models
 from sqlalchemy.orm import Session
 from random import choice
 from sqlalchemy import desc
+from sqlalchemy.exc import SQLAlchemyError
 
 
 from db_engine.tags_crud import get_tag_by_id
@@ -17,13 +18,17 @@ from schemas.notes_schemas import Tags, Note
 def new_note(db: Session, t: Note):
     tags = [get_tag_by_id(db, i) for i in t.tags]
     n = models.Note()
-    n.note_content = t.note_content
-    n.note_date = t.note_date
-    n.tags = tags
-    db.add(n)
-    db.commit()
-    db.refresh(n)
-    return n
+    try:
+        n.note_content = t.note_content
+        n.note_date = t.note_date
+        n.tags = tags
+        db.add(n)
+        db.commit()
+        db.refresh(n)
+        return n
+    except SQLAlchemyError as e:
+        error = str(e.__dict__["orig"])
+        return error
 
 
 def get_all_notes(db: Session):
@@ -52,9 +57,15 @@ def get_n_notes(db: Session, n: int):
 
 def get_random_note(db: Session):
     result = choice(db.query(models.Note).all())
-    tags = result.tags 
-    return(result)
+    tags = result.tags
+    return result
+
 
 def get_latest_note(db: Session):
     results = db.query(models.Note).order_by(models.Note.id.desc()).first()
     return results
+
+
+def delete_note_by_id(db: Session, id: int):
+    note = db.query(models.Note).filter(models.Note.id == id).delete()
+    return note
