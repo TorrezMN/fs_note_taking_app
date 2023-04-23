@@ -73,4 +73,6 @@ def get_latest_note(db=Depends(db)):
 
 @notes_router.get("/get_random_note")
 def get_random_note(db=Depends(db)):
-    return {"notes": "get_random_note!"}
+    API_RESPONSE["data"] = crud.get_random_note(db)
+    return API_RESPONSE
+

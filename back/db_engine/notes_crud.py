@@ -50,6 +50,11 @@ def get_n_notes(db: Session, n: int):
     return [choice(results) for i in range(0, n)]
 
 
+def get_random_note(db: Session):
+    result = choice(db.query(models.Note).all())
+    tags = result.tags 
+    return(result)
+
 def get_latest_note(db: Session):
-    results = db.query(models.Note).all()
+    results = db.query(models.Note).order_by(models.Note.id.desc()).first()
     return results
